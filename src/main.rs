@@ -1,3 +1,4 @@
+mod animation;
 mod camera;
 mod game_consts;
 mod player;
@@ -12,6 +13,7 @@ fn main() {
         .add_plugins(LdtkPlugin)
         .add_plugins(EguiPlugin::default())
         .add_plugins(WorldInspectorPlugin::default())
+        .add_plugins(animation::plugin)
         .add_plugins(camera::plugin)
         .add_plugins(player::plugin)
         .add_systems(Startup, load_level)
