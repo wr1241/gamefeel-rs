@@ -1,3 +1,5 @@
+mod input;
+
 use bevy::prelude::*;
 use bevy_ecs_ldtk::prelude::*;
 
@@ -60,6 +62,7 @@ fn player_initial_animation_timer(_: &EntityInstance) -> AnimationTimer {
 
 #[derive(Component, Default)]
 #[require(camera::Target)]
+#[component(on_add = input::setup_player_input)]
 pub struct Player;
 
 #[derive(Bundle, LdtkEntity)]
@@ -108,6 +111,8 @@ fn update_player_animation(
 pub fn plugin(app: &mut App) {
     app.register_ldtk_entity::<PlayerBundle>("PlayerStart");
     app.register_type::<PlayerState>();
+
+    app.add_plugins(input::plugin);
 
     app.add_systems(PreUpdate, update_player_animation);
 }
