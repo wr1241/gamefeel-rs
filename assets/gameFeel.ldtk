@@ -5,12 +5,12 @@
 		"doc": "https://ldtk.io/json",
 		"schema": "https://ldtk.io/files/JSON_SCHEMA.json",
 		"appAuthor": "Sebastien 'deepnight' Benard",
-		"appVersion": "1.5.4",
+		"appVersion": "1.5.3",
 		"url": "https://ldtk.io"
 	},
 	"iid": "de07ff90-7820-11ed-ac6b-bbc68d89d940",
-	"jsonVersion": "1.5.4",
-	"appBuildId": 475759,
+	"jsonVersion": "1.5.3",
+	"appBuildId": 473703,
 	"nextUid": 66,
 	"identifierStyle": "Capitalize",
 	"toc": [],
@@ -1398,7 +1398,7 @@
 			"allowOutOfBounds": false,
 			"doc": null,
 			"width": 16,
-			"height": 24,
+			"height": 16,
 			"resizableX": false,
 			"resizableY": false,
 			"minWidth": null,
@@ -1433,7 +1433,7 @@
 			"allowOutOfBounds": false,
 			"doc": null,
 			"width": 16,
-			"height": 24,
+			"height": 16,
 			"resizableX": false,
 			"resizableY": false,
 			"minWidth": null,
@@ -1562,7 +1562,7 @@
 							"__smartColor": "#E43B44",
 							"iid": "d4261730-fec0-11ee-90f4-0707466d326b",
 							"width": 16,
-							"height": 24,
+							"height": 16,
 							"defUid": 25,
 							"px": [552,368],
 							"fieldInstances": []
@@ -1576,7 +1576,7 @@
 							"__smartColor": "#E43B44",
 							"iid": "fd6a0e30-fec0-11ee-90f4-5953ecf64688",
 							"width": 16,
-							"height": 24,
+							"height": 16,
 							"defUid": 25,
 							"px": [712,368],
 							"fieldInstances": []
@@ -1590,7 +1590,7 @@
 							"__smartColor": "#E43B44",
 							"iid": "0516b060-fec0-11ee-aca3-b362c486a343",
 							"width": 16,
-							"height": 24,
+							"height": 16,
 							"defUid": 25,
 							"px": [776,336],
 							"fieldInstances": []
@@ -1604,7 +1604,7 @@
 							"__smartColor": "#E43B44",
 							"iid": "8eac1a40-fec0-11ee-887b-9bcff703be81",
 							"width": 16,
-							"height": 24,
+							"height": 16,
 							"defUid": 25,
 							"px": [280,336],
 							"fieldInstances": []
@@ -1618,23 +1618,23 @@
 							"__smartColor": "#E43B44",
 							"iid": "32755cc0-fec0-11ee-887b-21308959e43a",
 							"width": 16,
-							"height": 24,
+							"height": 16,
 							"defUid": 25,
 							"px": [744,288],
 							"fieldInstances": []
 						},
 						{
 							"__identifier": "PlayerStart",
-							"__grid": [33,19],
+							"__grid": [33,18],
 							"__pivot": [0.5,1],
 							"__tags": [],
 							"__tile": { "tilesetUid": 23, "x": 0, "y": 240, "w": 16, "h": 16 },
 							"__smartColor": "#75FF00",
 							"iid": "9f529cd0-fec0-11ee-887b-29cace8aa096",
 							"width": 16,
-							"height": 24,
+							"height": 16,
 							"defUid": 21,
-							"px": [536,320],
+							"px": [536,304],
 							"fieldInstances": []
 						},
 						{
@@ -1646,7 +1646,7 @@
 							"__smartColor": "#E43B44",
 							"iid": "36cadd80-fec0-11ee-b74d-e74f5ce85b28",
 							"width": 16,
-							"height": 24,
+							"height": 16,
 							"defUid": 25,
 							"px": [376,336],
 							"fieldInstances": []
@@ -1740,7 +1740,7 @@
 						1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 						1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 						1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-
+						
 					],
 					"autoLayerTiles": [
 						{ "px": [656,176], "src": [320,112], "f": 0, "t": 230, "d": [28,789], "a": 1 },

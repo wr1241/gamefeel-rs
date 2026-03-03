@@ -1,14 +1,15 @@
+mod debug;
 mod input;
 
 use bevy::prelude::*;
 use bevy_ecs_ldtk::prelude::*;
 
 use crate::{
-    animation::{AnimationIndices, AnimationTimer},
+    animation::{AnimationBundle, AnimationIndices, AnimationTimer},
     camera,
 };
 
-#[derive(Component, Debug, Default, Reflect)]
+#[derive(Component, Debug, Default, Eq, PartialEq, Reflect)]
 enum PlayerState {
     #[default]
     Idle,
@@ -26,22 +27,46 @@ enum PlayerState {
 impl PlayerState {
     fn get_animation_timer(&self) -> AnimationTimer {
         match self {
-            Self::Idle => AnimationTimer::fps(8.0),
-            _ => todo!(),
+            _ => AnimationTimer::fps(8.0),
         }
     }
 
     fn get_animation_indices(&self) -> AnimationIndices {
         match self {
             Self::Idle => AnimationIndices { first: 0, last: 7 },
-            _ => todo!(),
-        }
-    }
-
-    fn get_texture_atlas_layout(&self) -> TextureAtlasLayout {
-        match self {
-            Self::Idle => TextureAtlasLayout::from_grid(UVec2::splat(64), 8, 1, None, None),
-            _ => todo!(),
+            Self::IdleWeapon => AnimationIndices { first: 8, last: 8 },
+            Self::JumpDown => AnimationIndices {
+                first: 16,
+                last: 16,
+            },
+            Self::JumpUp => AnimationIndices {
+                first: 24,
+                last: 24,
+            },
+            Self::Land => AnimationIndices {
+                first: 32,
+                last: 34,
+            },
+            Self::Run => AnimationIndices {
+                first: 40,
+                last: 44,
+            },
+            Self::ClimbStep => AnimationIndices {
+                first: 48,
+                last: 49,
+            },
+            Self::RunWeapon => AnimationIndices {
+                first: 56,
+                last: 59,
+            },
+            Self::Shoot => AnimationIndices {
+                first: 64,
+                last: 66,
+            },
+            Self::ReadyWeapon => AnimationIndices {
+                first: 72,
+                last: 79,
+            },
         }
     }
 }
@@ -52,12 +77,11 @@ impl From<&EntityInstance> for PlayerState {
     }
 }
 
-fn player_initial_animation_indices(_: &EntityInstance) -> AnimationIndices {
-    PlayerState::default().get_animation_indices()
-}
-
-fn player_initial_animation_timer(_: &EntityInstance) -> AnimationTimer {
-    PlayerState::default().get_animation_timer()
+fn player_initial_animation(_: &EntityInstance) -> AnimationBundle {
+    AnimationBundle {
+        indices: PlayerState::default().get_animation_indices(),
+        timer: PlayerState::default().get_animation_timer(),
+    }
 }
 
 #[derive(Component, Default)]
@@ -73,46 +97,27 @@ pub struct PlayerBundle {
     #[from_entity_instance]
     player_state: PlayerState,
 
-    #[sprite("hero.png")]
+    #[sprite_sheet("hero.png", 64, 64, 8, 10, 0, 0, 0)]
     sprite: Sprite,
 
-    #[with(player_initial_animation_indices)]
-    animation_indices: AnimationIndices,
-
-    #[with(player_initial_animation_timer)]
-    animation_timer: AnimationTimer,
+    #[with(player_initial_animation)]
+    animation: AnimationBundle,
 }
 
 fn update_player_animation(
-    query: Single<
-        (
-            &mut AnimationTimer,
-            &mut AnimationIndices,
-            &mut Sprite,
-            &PlayerState,
-        ),
-        Changed<PlayerState>,
-    >,
-    mut layouts: ResMut<Assets<TextureAtlasLayout>>,
+    query: Single<(&mut AnimationTimer, &mut AnimationIndices, &PlayerState), Changed<PlayerState>>,
 ) {
-    let (mut timer, mut indices, mut sprite, state) = query.into_inner();
+    let (mut timer, mut indices, state) = query.into_inner();
 
     *timer = state.get_animation_timer();
     *indices = state.get_animation_indices();
-
-    sprite.texture_atlas = Some(TextureAtlas {
-        layout: layouts.add(state.get_texture_atlas_layout()),
-        index: indices.first,
-    });
-
-    sprite.custom_size = Some(Vec2::splat(64.0));
 }
 
 pub fn plugin(app: &mut App) {
     app.register_ldtk_entity::<PlayerBundle>("PlayerStart");
     app.register_type::<PlayerState>();
 
-    app.add_plugins(input::plugin);
+    app.add_plugins(input::plugin).add_plugins(debug::plugin);
 
-    app.add_systems(PreUpdate, update_player_animation);
+    app.add_systems(PostUpdate, update_player_animation);
 }

@@ -40,13 +40,30 @@ pub(super) fn setup_player_input(mut world: DeferredWorld, context: HookContext)
 fn apply_movement(
     time: Res<Time>,
     movement: Single<&Action<Move>>,
-    mut transform: Option<Single<&mut Transform, With<OnGround>>>,
+    player: Option<Single<(&mut Transform, &mut super::PlayerState, &mut Sprite), With<OnGround>>>,
 ) {
-    let Some(transform) = &mut transform else {
+    let Some(player) = player else {
         return;
     };
 
-    transform.translation.x += movement.x * 200.0 * time.delta_secs();
+    let (mut transform, mut state, mut sprite) = player.into_inner();
+
+    if movement.x != 0.0 {
+        transform.translation.x += movement.x * 200.0 * time.delta_secs();
+        if *state != super::PlayerState::Run {
+            *state = super::PlayerState::Run;
+        }
+
+        if movement.x == 1.0 {
+            sprite.flip_x = false;
+        } else if movement.x == -1.0 {
+            sprite.flip_x = true;
+        }
+    } else {
+        if *state != super::PlayerState::Idle {
+            *state = super::PlayerState::Idle;
+        }
+    }
 }
 
 pub(super) fn plugin(app: &mut App) {

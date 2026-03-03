@@ -15,6 +15,12 @@ impl AnimationTimer {
     }
 }
 
+#[derive(Bundle)]
+pub struct AnimationBundle {
+    pub indices: AnimationIndices,
+    pub timer: AnimationTimer,
+}
+
 fn update_animation(
     time: Res<Time>,
     mut query: Query<(&mut AnimationTimer, &AnimationIndices, &mut Sprite)>,
