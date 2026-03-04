@@ -1,3 +1,5 @@
+mod debug;
+
 use bevy::prelude::*;
 use bevy_ecs_ldtk::{LdtkIntCell, app::LdtkIntCellAppExt};
 
@@ -11,4 +13,6 @@ pub struct WallBundle {
 
 pub(super) fn plugin(app: &mut App) {
     app.register_ldtk_int_cell::<WallBundle>(1);
+
+    app.add_plugins(debug::plugin);
 }

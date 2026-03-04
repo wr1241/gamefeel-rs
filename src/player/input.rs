@@ -64,6 +64,18 @@ fn apply_movement(
             *state = super::PlayerState::Idle;
         }
     }
+
+    // debug purpose
+    if movement.y != 0.0 {
+        transform.translation.y += movement.y * 200.0 * time.delta_secs();
+        if *state != super::PlayerState::Run {
+            *state = super::PlayerState::Run;
+        }
+    } else {
+        if *state != super::PlayerState::Idle {
+            *state = super::PlayerState::Idle;
+        }
+    }
 }
 
 pub(super) fn plugin(app: &mut App) {

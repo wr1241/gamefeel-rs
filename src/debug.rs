@@ -1,15 +1,15 @@
 use bevy::prelude::*;
 use bevy_inspector_egui::{bevy_egui::EguiPlugin, quick::WorldInspectorPlugin};
 
-#[derive(Component)]
-struct DebugInfo;
+#[derive(Component, Default)]
+pub struct DebugInfo(pub String);
 
 #[derive(Component)]
 struct EntityCount(usize);
 
 fn display_debug_info(mut commands: Commands) {
     commands.spawn((
-        DebugInfo,
+        DebugInfo::default(),
         EntityCount(0),
         Node {
             position_type: PositionType::Absolute,
@@ -32,11 +32,9 @@ fn update_entity_count(
     }
 }
 
-fn update_debug_info(
-    entity_count: Single<&EntityCount>,
-    mut text: Single<&mut Text, With<DebugInfo>>,
-) {
-    text.0 = format!("Entity Count: {}", entity_count.0);
+fn update_debug_info(entity_count: Single<&EntityCount>, debug: Single<(&mut Text, &DebugInfo)>) {
+    let (mut text, debug_info) = debug.into_inner();
+    text.0 = format!("Entity Count: {}\n{}", entity_count.0, debug_info.0);
 }
 
 pub(super) fn plugin(app: &mut App) {

@@ -32,6 +32,13 @@ fn main() {
 }
 
 fn load_level(mut commands: Commands, asset_server: Res<AssetServer>) {
+    commands.insert_resource(LdtkSettings {
+        level_spawn_behavior: LevelSpawnBehavior::UseZeroTranslation,
+        set_clear_color: SetClearColor::FromLevelBackground,
+        int_grid_rendering: IntGridRendering::Invisible,
+        level_background: LevelBackground::Nonexistent,
+        ..Default::default()
+    });
     commands.spawn(LdtkWorldBundle {
         ldtk_handle: asset_server.load("gameFeel.ldtk").into(),
         ..Default::default()
