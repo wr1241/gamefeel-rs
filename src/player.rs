@@ -1,6 +1,7 @@
 mod debug;
 mod input;
 
+use avian2d::prelude::RigidBody;
 use bevy::prelude::*;
 use bevy_ecs_ldtk::prelude::*;
 
@@ -85,8 +86,12 @@ fn player_initial_animation(_: &EntityInstance) -> AnimationBundle {
     }
 }
 
-fn player_initial_mass(_: &EntityInstance) -> Mass {
-    Mass(1.0)
+// fn player_initial_mass(_: &EntityInstance) -> Mass {
+//     Mass(1.0)
+// }
+
+fn player_initial_rigid_body(_: &EntityInstance) -> RigidBody {
+    RigidBody::Kinematic
 }
 
 #[derive(Component, Default)]
@@ -108,8 +113,10 @@ pub struct PlayerBundle {
     #[with(player_initial_animation)]
     animation: AnimationBundle,
 
-    #[with(player_initial_mass)]
-    mass: Mass,
+    // #[with(player_initial_mass)]
+    // mass: Mass,
+    #[with(player_initial_rigid_body)]
+    rigid_body: RigidBody,
 }
 
 fn update_player_animation(

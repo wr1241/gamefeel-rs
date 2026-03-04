@@ -6,6 +6,7 @@ mod game_consts;
 mod physics;
 mod player;
 
+use avian2d::prelude::*;
 use bevy::prelude::*;
 use bevy_ecs_ldtk::prelude::*;
 use bevy_enhanced_input::prelude::*;
@@ -22,12 +23,13 @@ fn main() {
         )
         .add_plugins(LdtkPlugin)
         .add_plugins(EnhancedInputPlugin)
+        .add_plugins(PhysicsPlugins::default())
         .add_plugins(animation::plugin)
         .add_plugins(camera::plugin)
         .add_plugins(collisions::plugin)
         .add_plugins(debug::plugin)
         .add_plugins(player::plugin)
-        .add_plugins(physics::plugin)
+        // .add_plugins(physics::plugin)
         .add_systems(Startup, load_level)
         .insert_resource(LevelSelection::indices(0, 0))
         .run();

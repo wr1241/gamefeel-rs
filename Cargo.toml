@@ -6,10 +6,10 @@ edition = "2024"
 [dependencies]
 log = { version = "*", features = ["max_level_debug", "release_max_level_warn"] }
 bevy = { version = "0.18", default-features = false, features = ["2d", "file_watcher"] }
-# bevy_ecs_ldtk = { git = "https://github.com/wr1241/bevy_ecs_ldtk.git", branch = "main" }
-bevy_ecs_ldtk = { path = "../../bevy_ecs_ldtk" }
+bevy_ecs_ldtk = { git = "https://github.com/wr1241/bevy_ecs_ldtk.git", branch = "main" }
 bevy-inspector-egui = "0.36"
 bevy_enhanced_input = "0.24"
+avian2d = "0.5"
 
 # Enable a small amount of optimization in the dev profile.
 [profile.dev]
