@@ -3,6 +3,7 @@ mod camera;
 mod collisions;
 mod debug;
 mod game_consts;
+mod physics;
 mod player;
 
 use bevy::prelude::*;
@@ -26,6 +27,7 @@ fn main() {
         .add_plugins(collisions::plugin)
         .add_plugins(debug::plugin)
         .add_plugins(player::plugin)
+        .add_plugins(physics::plugin)
         .add_systems(Startup, load_level)
         .insert_resource(LevelSelection::indices(0, 0))
         .run();

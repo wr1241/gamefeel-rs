@@ -7,6 +7,7 @@ use bevy_ecs_ldtk::prelude::*;
 use crate::{
     animation::{AnimationBundle, AnimationIndices, AnimationTimer},
     camera,
+    physics::Mass,
 };
 
 #[derive(Component, Debug, Default, Eq, PartialEq, Reflect)]
@@ -49,7 +50,7 @@ impl PlayerState {
             },
             Self::Run => AnimationIndices {
                 first: 40,
-                last: 44,
+                last: 43,
             },
             Self::ClimbStep => AnimationIndices {
                 first: 48,
@@ -84,6 +85,10 @@ fn player_initial_animation(_: &EntityInstance) -> AnimationBundle {
     }
 }
 
+fn player_initial_mass(_: &EntityInstance) -> Mass {
+    Mass(1.0)
+}
+
 #[derive(Component, Default)]
 #[require(camera::Target)]
 #[component(on_add = input::setup_player_input)]
@@ -102,6 +107,9 @@ pub struct PlayerBundle {
 
     #[with(player_initial_animation)]
     animation: AnimationBundle,
+
+    #[with(player_initial_mass)]
+    mass: Mass,
 }
 
 fn update_player_animation(
