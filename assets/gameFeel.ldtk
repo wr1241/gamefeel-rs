@@ -1624,20 +1624,6 @@
 							"fieldInstances": []
 						},
 						{
-							"__identifier": "PlayerStart",
-							"__grid": [33,18],
-							"__pivot": [0.5,1],
-							"__tags": [],
-							"__tile": { "tilesetUid": 23, "x": 0, "y": 240, "w": 16, "h": 16 },
-							"__smartColor": "#75FF00",
-							"iid": "9f529cd0-fec0-11ee-887b-29cace8aa096",
-							"width": 16,
-							"height": 16,
-							"defUid": 21,
-							"px": [536,304],
-							"fieldInstances": []
-						},
-						{
 							"__identifier": "Enemy",
 							"__grid": [23,20],
 							"__pivot": [0.5,1],
@@ -1649,6 +1635,20 @@
 							"height": 16,
 							"defUid": 25,
 							"px": [376,336],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "PlayerStart",
+							"__grid": [35,16],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 23, "x": 0, "y": 240, "w": 16, "h": 16 },
+							"__smartColor": "#75FF00",
+							"iid": "9f529cd0-fec0-11ee-887b-29cace8aa096",
+							"width": 16,
+							"height": 16,
+							"defUid": 21,
+							"px": [568,272],
 							"fieldInstances": []
 						}
 					]

@@ -11,7 +11,14 @@ use bevy_enhanced_input::prelude::*;
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest()))
+        .add_plugins(
+            DefaultPlugins
+                .set(ImagePlugin::default_nearest())
+                .set(AssetPlugin {
+                    watch_for_changes_override: Some(cfg!(debug_assertions)),
+                    ..Default::default()
+                }),
+        )
         .add_plugins(LdtkPlugin)
         .add_plugins(EnhancedInputPlugin)
         .add_plugins(animation::plugin)
